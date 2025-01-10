@@ -2,6 +2,9 @@
 
 namespace LangPilot;
 
+use LangPilot\Console\Commands\ListMissingTrans;
+use LangPilot\Console\Commands\SyncTranslations;
+
 use Illuminate\Support\ServiceProvider;
 
 class LangPilotServiceProvider extends ServiceProvider
@@ -11,11 +14,9 @@ class LangPilotServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(TranslationService::class, fn(): \LangPilot\TranslationService => new TranslationService());
-        $this->commands([
-            Console\Commands\ListMissingTrans::class,
-            Console\Commands\SyncTranslations::class,
-        ]);
+        $this->mergeConfigFrom(__DIR__ . '/../config/lang-pilot.php', 'lang-pilot');
+
+        $this->app->singleton(TranslationService::class, fn(): TranslationService => new TranslationService());
     }
 
     /**
@@ -23,6 +24,15 @@ class LangPilotServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/lang-pilot.php', 'lang-pilot');
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                ListMissingTrans::class,
+                SyncTranslations::class,
+            ]);
+        }
+
+        $this->publishes([
+            __DIR__ . '/../config/lang-pilot.php' => config_path('lang-pilot.php'),
+        ], 'lang-pilot-config');
     }
 }

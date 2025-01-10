@@ -15,12 +15,12 @@ return [
     'default' => \LangPilot\Drivers\GeminiTranslator::class,
 
     /*
-     * The description of your app to assit in the translation process.
+     * The description of your app to asset in the translation process.
      */
     'description' => '',
 
     /*
-     * The drivers to use.
+     * The driver's configuration.
      */
     'gemini' => [
         'api_key' => env('GEMINI_API_KEY'),
