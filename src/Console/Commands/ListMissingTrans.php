@@ -39,7 +39,7 @@ class ListMissingTrans extends Command
         }
 
         $translations = $translationService->setLocale($locale)->getMissingTransKeys();
-        $arr = array_map(fn($key) => [$key], $translations);
+        $arr = array_map(fn($key): array => [$key], $translations);
         $title = 'Missing Translations ' . Str::upper($locale) . ' (' . count($translations) . ')';
         $this->table([$title], $arr);
     }

@@ -19,7 +19,8 @@
     "type": "library",
     "require-dev": {
         "orchestra/testbench": "^9.9",
-        "pestphp/pest": "*"
+        "pestphp/pest": "*",
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {

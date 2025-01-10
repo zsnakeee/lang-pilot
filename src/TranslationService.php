@@ -35,7 +35,7 @@ class TranslationService extends TranslationBase
         $this->langDir = config('lang-pilot.lang_path');
         $this->langFilePath = "{$this->langDir}/{$locale}.json";
 
-        if (empty($this->translations)) {
+        if ($this->translations === []) {
             $this->translations = $this->getMissingTranslations($this->getLangKeys(), $locale);
         }
 
@@ -66,7 +66,7 @@ class TranslationService extends TranslationBase
 
     public function exportToJSON(array $translations = []): void
     {
-        if (empty($translations)) {
+        if ($translations === []) {
             $translations = $this->translate();
         }
 

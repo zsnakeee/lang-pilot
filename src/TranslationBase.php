@@ -16,8 +16,6 @@ class TranslationBase
 
     /**
      * Retrieve all language keys used in the application.
-     *
-     * @return array
      */
     public function getLangKeys(): array
     {
@@ -45,10 +43,6 @@ class TranslationBase
 
     /**
      * Check if a given language key is part of a structured lang file.
-     *
-     * @param string $key
-     * @param string $locale
-     * @return bool
      */
     public function isPathKey(string $key, string $locale): bool
     {
@@ -89,7 +83,7 @@ class TranslationBase
     public function getMissingTranslations(array $keys, string $locale): array
     {
         $existingTranslations = $this->getExistingTranslations($locale);
-        $missingKeys = array_filter($keys, function ($key) use ($existingTranslations, $locale) {
+        $missingKeys = array_filter($keys, function ($key) use ($existingTranslations, $locale): bool {
             return !isset($existingTranslations[$key]) && !$this->isPathKey($key, $locale);
         });
 

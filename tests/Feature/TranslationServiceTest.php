@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\File;
 use LangPilot\TranslationService;
 
-it('exports translations', function () {
+it('exports translations', function (): void {
     $t = [
         'Hello' => 'مرحبا',
         'Welcome' => 'أهلا بك',
@@ -28,7 +28,7 @@ it('exports translations', function () {
 });
 
 
-it('translates keys using default driver', function () {
+it('translates keys using default driver', function (): void {
     $service = new TranslationService();
     $translations = $service
         ->setLocale('ar')
@@ -46,7 +46,7 @@ it('translates keys using default driver', function () {
 });
 
 
-it('translate app keys', function () {
+it('translate app keys', function (): void {
 
     File::shouldReceive('allFiles')
         ->andReturn([
@@ -80,7 +80,7 @@ it('translate app keys', function () {
         ->andReturn(true);
 
     File::shouldReceive('put')
-        ->withArgs(function ($path, $content) {
+        ->withArgs(function ($path, $content): true {
             // Optionally, you can assert on the arguments here
             expect($path)
                 ->toContain('lang/ar.json')

@@ -5,7 +5,7 @@ use LangPilot\TranslationBase;
 
 
 
-it('retrieves language keys from files', function () {
+it('retrieves language keys from files', function (): void {
 
     put_dummy_lang_keys_in_files();
 
@@ -20,7 +20,7 @@ it('retrieves language keys from files', function () {
 });
 
 
-it('detects structured lang file keys', function () {
+it('detects structured lang file keys', function (): void {
     $base = new TranslationBase();
 
     expect($base->isPathKey('auth.failed', 'en'))
@@ -29,7 +29,7 @@ it('detects structured lang file keys', function () {
         ->toBeFalse();
 });
 
-it('retrieves existing translations from JSON files', function () {
+it('retrieves existing translations from JSON files', function (): void {
     $data = [
         'Hello' => 'مرحبا',
         'Goodbye' => 'وداعا',
@@ -44,7 +44,7 @@ it('retrieves existing translations from JSON files', function () {
 });
 
 
-it('retrieves missing translations', function () {
+it('retrieves missing translations', function (): void {
 
     File::shouldReceive('allFiles')->andReturn([]);
     File::shouldReceive('exists')->andReturn(true);

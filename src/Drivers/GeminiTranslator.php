@@ -28,7 +28,6 @@ class GeminiTranslator implements TranslationDriverInterface
 
     public function __construct()
     {
-        $this->model = GeminiModels::GEMINI_15_FLASH;
         $this->apiKey = config('lang-pilot.gemini.api_key');
         $this->description = config('lang-pilot.description');
     }
