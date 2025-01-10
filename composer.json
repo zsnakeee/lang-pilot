@@ -1,0 +1,39 @@
+{
+    "name": "zsnakeee/lang-pilot",
+    "description": "A powerful and intuitive Laravel package for managing translations and localization. Lang Pilot simplifies the process of extracting, organizing, and managing language keys across your application, offering seamless integration with various translation drivers. Whether you're localizing a small project or handling complex multilingual systems, Lang Pilot provides the tools you need for efficient and automated translation workflows.",
+    "keywords": [
+        "laravel",
+        "localization",
+        "translation",
+        "language",
+        "i18n",
+        "l10n"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ziad Talaat",
+            "email": "ziadtallat33@gmail.com"
+        }
+    ],
+    "type": "library",
+    "require-dev": {
+        "orchestra/testbench": "^9.9",
+        "pestphp/pest": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LangPilot\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LangPilot\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
