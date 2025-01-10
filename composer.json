@@ -32,6 +32,20 @@
             "LangPilot\\Tests\\": "tests/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LangPilot\\LangPilotServiceProvider"
+            ],
+            "aliases": {
+                "LangPilot": "LangPilot\\Facades\\LangPilot"
+            }
+        }
+    },
+    "scripts": {
+        "test": ".\\vendor\\bin\\pest",
+        "rector": ".\\vendor\\bin\\rector process src --config .\\rector.php"
+    },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
