@@ -22,7 +22,6 @@ class TranslationBase
         $files = array_merge(File::allFiles(base_path('app')), File::allFiles(base_path('resources')));
 
 
-
         $langKeys = [];
 
         foreach ($files as $file) {
@@ -70,11 +69,17 @@ class TranslationBase
 
     /**
      * Retrieve existing translations for a given locale.
+     * @throws Exception
      */
     public function getExistingTranslations(string $locale): array
     {
         $langFilePath = "{$this->langDir}/{$locale}.json";
-        return File::exists($langFilePath) ? json_decode(File::get($langFilePath), true) : [];
+        $currentTranslations = json_decode(File::get($langFilePath), true);
+        if ($currentTranslations === null) {
+            throw new Exception("Invalid JSON in file: {$locale}.json");
+        }
+
+        return File::exists($langFilePath) ? $currentTranslations : [];
     }
 
     /**
