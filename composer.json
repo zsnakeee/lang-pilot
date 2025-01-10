@@ -22,6 +22,8 @@
         "pestphp/pest": "*",
         "rector/rector": "^2.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "LangPilot\\": "src/"
