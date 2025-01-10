@@ -3,6 +3,7 @@
 namespace LangPilot\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Validator;
 use LangPilot\Rules\Locale;
 use LangPilot\TranslationService;
 
@@ -28,12 +29,12 @@ class SyncTranslations extends Command
     public function handle(TranslationService $translationService): void
     {
         $locale = $this->argument('locale');
-        $error = $this->validatePrompt($locale, [
+        $validation = Validator::make(['locale' => $locale], [
             'locale' => ['required', new Locale()],
         ]);
 
-        if ($error) {
-            $this->error($error);
+        if ($validation->fails()) {
+            $this->error($validation->errors()->first());
             return;
         }
 
