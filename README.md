@@ -16,6 +16,12 @@ Require LangPilot using [Composer](https://getcomposer.org):
 composer require zsnakeee/lang-pilot
 ```
 
+Add GEMINI_API_KEY to your `.env` file:
+
+```dotenv
+GEMINI_API_KEY=your-api-key
+```
+
 ---
 
 ## Config
