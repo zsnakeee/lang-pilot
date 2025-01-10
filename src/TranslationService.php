@@ -10,7 +10,7 @@ class TranslationService extends TranslationBase
 {
     protected string $locale;
 
-    protected array $translations;
+    protected array $translations = [];
 
     protected string $langFilePath;
 
