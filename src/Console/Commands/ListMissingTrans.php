@@ -35,14 +35,21 @@ class ListMissingTrans extends Command
         ]);
 
         if ($validation->fails()) {
-            $this->error($validation->errors()->first());
+            $this->warn($validation->errors()->first());
             return;
         }
 
+        try {
+            $translations = $translationService
+                ->setLocale($locale)
+                ->getMissingTransKeys();
 
-        $translations = $translationService->setLocale($locale)->getMissingTransKeys();
-        $arr = array_map(fn($key): array => [$key], $translations);
-        $title = 'Missing Translations ' . Str::upper($locale) . ' (' . count($translations) . ')';
-        $this->table([$title], $arr);
+            $arr = array_map(fn($key): array => [$key], $translations);
+            $title = 'Missing Translations ' . Str::upper($locale) . ' (' . count($translations) . ')';
+            $this->table([$title], $arr);
+        } catch (\Exception $e) {
+            $this->warn($e->getMessage());
+            return;
+        }
     }
 }

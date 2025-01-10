@@ -34,23 +34,30 @@ class SyncTranslations extends Command
         ]);
 
         if ($validation->fails()) {
-            $this->error($validation->errors()->first());
+            $this->warn($validation->errors()->first());
             return;
         }
 
-        $translationService->setLocale($locale);
-        $bar = $this->output->createProgressBar(count($translationService->getMissingTransKeys()));
-        $bar->start();
-        $bar->setFormat('verbose');
+        try {
+            $translationService
+                ->setLocale($locale);
 
-        $translations = $translationService
-            ->translate();
+            $bar = $this->output->createProgressBar(count($translationService->getMissingTransKeys()));
+            $bar->start();
+            $bar->setFormat('verbose');
 
-        $bar->finish();
+            $translations = $translationService
+                ->translate();
 
-        $translationService->setTranslations($translations);
-        $translationService->exportToJSON();
+            $bar->finish();
 
-        $this->info("\nTranslated " . count($translations) . " keys for {$locale}.");
+            $translationService->setTranslations($translations);
+            $translationService->exportToJSON();
+
+            $this->info("\nTranslated " . count($translations) . " keys for {$locale}.");
+        } catch (\Exception $e) {
+            $this->warn($e->getMessage());
+            return;
+        }
     }
 }
